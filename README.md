@@ -1,6 +1,6 @@
 # In development
 
-This project was started on 24/03/2024 and is currently being worked on. It will be similar to the mobile app at https://github.com/adammarszalek22/pl but I'm hoping to improve the UI and add more features in the server as I go along (https://github.com/adammarszalek22/pl-server).
+This project was started on 23/03/2024 and is currently being worked on. It will be similar to the mobile app at https://github.com/adammarszalek22/pl but I'm hoping to improve the UI and add more features in the server as I go along (https://github.com/adammarszalek22/pl-server).
 
 For now the HTML and CSS files are a simple design as I'm focusing on functionality first.
 
