@@ -12,8 +12,8 @@ export const handleLogin = async () => {
         const formData = new FormData(form);
         const userFormData = Object.fromEntries(formData.entries());
         
-        await validateLoginData(userFormData);
-
+        if (!validateLoginData(userFormData)) return;
+        
         const responseData = await login(userFormData);
 
         appState.newUser(responseData);
@@ -22,15 +22,31 @@ export const handleLogin = async () => {
 
 }
 
-const validateLoginData = async (userFormData) => {
+const validateLoginData = (userFormData) => {
 
-    if (userFormData.password !== userFormData.password2) {
-        console.error('Passwords do not match');
-        await displayErroMessage('Passwords do not match');
+    if (userFormData.password.length < 6) {
+        console.error('Password needs to be at least 6 letters long');
+        displayErrorMessage('Password needs to be at least 6 letters long');
         return;
     }
 
-    await cleanErroMessageField();
+    cleanErroMessageField();
     return true;
+
+}
+
+const displayErrorMessage = (message) => {
+
+    const warningMessage = document.getElementById('warningMessage');
+
+    warningMessage.textContent = message;
+    warningMessage.style.display = 'block';
+
+}
+
+const cleanErroMessageField = () => {
+
+    const warningMessage = document.getElementById('warningMessage');
+    warningMessage.style.display = 'none';
 
 }

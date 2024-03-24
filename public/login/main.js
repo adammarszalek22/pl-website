@@ -1,4 +1,4 @@
-import { handleLogin } from './login/login.js';
+import { handleLogin } from './login.js';
 
 const main = async () => {
 

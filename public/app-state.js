@@ -1,20 +1,33 @@
 class AppState {
 
+    #userDetails;
+
     constructor() {
-        this.userDetails = {};
+        this.#userDetails = {};
     }
 
     newUser(newUserData) {
-        // TODO - add validation of data
-        this.userDetails = newUserData;
+
+        const validatedData = this.validate(newUserData);
+        this.#userDetails = validatedData;
+
+    }
+
+    validate(newUserData) {
+        const { access_token, refresh_token, user_id } = newUserData;
+        return { access_token, refresh_token, user_id };
     }
 
     deleteUserDetails() {
-        this.userDetails = {};
+        this.#userDetails = {};
     }
 
     userLoggedIn() {
         // Some code
+    }
+
+    getUserDetails() {
+        return this.#userDetails;
     }
 }
 

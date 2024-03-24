@@ -1,4 +1,4 @@
-import { handleRegistration } from './login/login.js';
+import { handleRegistration } from './registration.js';
 
 const main = async (userData) => {
 

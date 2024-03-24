@@ -3,7 +3,7 @@ import { appState } from '../app-state.js';
 
 export const handleRegistration = async () => {
 
-    const form = document.getElementById('registerForm');
+    const form = document.getElementById('registrationForm');
 
     form.addEventListener('submit', async function(event) {
 
@@ -11,8 +11,8 @@ export const handleRegistration = async () => {
         
         const formData = new FormData(form);
         const userFormData = Object.fromEntries(formData.entries());
-
-        await validateRegistrationData(userFormData);
+        
+        if (!validateRegistrationData(userFormData)) return;
 
         const responseData = await createUser(userFormData);
 
@@ -22,20 +22,20 @@ export const handleRegistration = async () => {
 
 }
 
-const validateRegistrationData = async (userFormData) => {
+const validateRegistrationData = (userFormData) => {
 
     if (userFormData.password !== userFormData.password2) {
         console.error('Passwords do not match');
-        await displayErroMessage('Passwords do not match');
+        displayErrorMessage('Passwords do not match');
         return;
     }
 
-    await cleanErroMessageField();
+    cleanErroMessageField();
     return true;
 
 }
 
-const displayErroMessage = async (message) => {
+const displayErrorMessage = (message) => {
 
     const warningMessage = document.getElementById('warningMessage');
 
@@ -44,7 +44,7 @@ const displayErroMessage = async (message) => {
 
 }
 
-const cleanErroMessageField = async () => {
+const cleanErroMessageField = () => {
 
     const warningMessage = document.getElementById('warningMessage');
     warningMessage.style.display = 'none';
