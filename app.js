@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 const pageRouter = require('./routes/page-router');
+const userRouter = require('./routes/user-router');
 
 const app = express();
 
@@ -22,6 +23,7 @@ const onStartUp = (req, res) => {
 }
 
 app.use('/', pageRouter);
+app.use('/api/user', userRouter);
 
 app.get('/', onStartUp);
 

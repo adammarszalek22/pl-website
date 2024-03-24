@@ -9,3 +9,8 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 - Setup the main structure of the webserver
 - Create and test login and registration functionality as well as page routing once login is successful
 - Add documentation to each api call function that communicates with the python pl server (params and what it returns)
+
+...
+
+- Boost my HTML and CSS skills
+- Make the website pretty and user friendly

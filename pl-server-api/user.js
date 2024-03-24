@@ -9,7 +9,7 @@ const url = "https://pl-server.onrender.com"
  * @throws {Error} If login fails or an error occurs during the request.
  */
 
-export const createUser = async (userData) => {
+module.exports.createUser = async (userData) => {
 
     try {
 
@@ -39,7 +39,7 @@ export const createUser = async (userData) => {
  * @throws {Error} If login fails or an error occurs during the request.
  */
 
-export const login = async (userData) => {
+module.exports.login = async (userData) => {
 
     try {
 
@@ -61,7 +61,7 @@ export const login = async (userData) => {
     }
 }
 
-export const getAllUsers = async (access_token) => {
+module.exports.getAllUsers = async (access_token) => {
     try {
         const response = await fetch(url + '/get_all', {
             method: "GET",
@@ -84,7 +84,7 @@ export const getAllUsers = async (access_token) => {
     }
 }
 
-export const getNonFreshToken = async (refresh_token, username, password) => {
+module.exports.getNonFreshToken = async (refresh_token, username, password) => {
     try {
         const response = await fetch(url + '/refresh', {
             method: "POST",
@@ -112,7 +112,7 @@ export const getNonFreshToken = async (refresh_token, username, password) => {
     }
 }
 
-export const revokeJWT = async (access_token) => {
+module.exports.revokeJWT = async (access_token) => {
     try {
         const response = await fetch(url + '/logout', {
             method: "POST",
@@ -135,7 +135,7 @@ export const revokeJWT = async (access_token) => {
     }
 }
 
-export const myUserInfo = async (access_token, id) => {
+module.exports.myUserInfo = async (access_token, id) => {
     try {
         const response = await fetch(url + '/user/' + id, {
             method: "GET",
@@ -158,7 +158,7 @@ export const myUserInfo = async (access_token, id) => {
     }
 }
 
-export const userInfoByPos = async (access_token, league_pos) => {
+module.exports.userInfoByPos = async (access_token, league_pos) => {
     try {
         const response = await fetch(url + '/user_pos', {
             method: "GET",
@@ -182,7 +182,7 @@ export const userInfoByPos = async (access_token, league_pos) => {
     }
 }
 
-export const firstTen = async (access_token) => {
+module.exports.firstTen = async (access_token) => {
     try {
         const response = await fetch(url + '/first-ten', {
             method: "GET",
@@ -205,7 +205,7 @@ export const firstTen = async (access_token) => {
     }
 }
 
-export const getByUsername = async (access_token, username) => {
+module.exports.getByUsername = async (access_token, username) => {
     try {
         const response = await fetch(url + '/user?username=' + username, {
             method: "GET",
@@ -228,7 +228,7 @@ export const getByUsername = async (access_token, username) => {
     }
 }
 
-export const deleteAccount = async (access_token) => {
+module.exports.deleteAccount = async (access_token) => {
     try {
         const response = await fetch(url + '/delete', {
             method: "DELETE",
@@ -251,7 +251,7 @@ export const deleteAccount = async (access_token) => {
     }
 }
 
-export const getBet = async (access_token, id) => {
+module.exports.getBet = async (access_token, id) => {
     try {
         const response = await fetch(url + '/bet/' + id, {
             method: "GET",
@@ -274,7 +274,7 @@ export const getBet = async (access_token, id) => {
     }
 }
 
-export const deleteBet = async (access_token, id) => {
+module.exports.deleteBet = async (access_token, id) => {
     try {
         const response = await fetch(url + '/bet/' + id, {
             method: "DELETE",
@@ -297,7 +297,7 @@ export const deleteBet = async (access_token, id) => {
     }
 }
 
-export const deleteAllBets = async (access_token) => {
+module.exports.deleteAllBets = async (access_token) => {
     try {
         const response = await fetch(url + '/bet', {
             method: "DELETE",
@@ -320,7 +320,7 @@ export const deleteAllBets = async (access_token) => {
     }
 }
 
-export const getAllBets = async (access_token) => {
+module.exports.getAllBets = async (access_token) => {
     try {
         const response = await fetch(url + '/bet', {
             method: "GET",
@@ -343,7 +343,7 @@ export const getAllBets = async (access_token) => {
     }
 }
 
-export const getAllBetsByUserId = async (access_token) => {
+module.exports.getAllBetsByUserId = async (access_token) => {
     try {
         const response = await fetch(url + '/bet_by_user_id', {
             method: "GET",
@@ -370,7 +370,7 @@ export const getAllBetsByUserId = async (access_token) => {
     }
 }
 
-export const postBet = async (access_token, match_id, goal1, goal2) => {
+module.exports.postBet = async (access_token, match_id, goal1, goal2) => {
     try {
         const response = await fetch(url + '/bet', {
             method: "POST",
@@ -403,7 +403,7 @@ export const postBet = async (access_token, match_id, goal1, goal2) => {
     }
 }
 
-export const updateBet = async (access_token, match_id, goal1, goal2) => {
+module.exports.updateBet = async (access_token, match_id, goal1, goal2) => {
     try {
         const response = await fetch(url + '/bet', {
             method: "PUT",
@@ -436,7 +436,7 @@ export const updateBet = async (access_token, match_id, goal1, goal2) => {
     }
 }
 
-export const updateMultipleBets = async (access_token, list_match_id, list_goal1, list_goal2) => {
+module.exports.updateMultipleBets = async (access_token, list_match_id, list_goal1, list_goal2) => {
     try {
         const response = await fetch(url + '/multiple_bets_update', {
             method: "PUT",
@@ -465,7 +465,7 @@ export const updateMultipleBets = async (access_token, list_match_id, list_goal1
     }
 }
 
-export const getAllGroups = async (access_token) => {
+module.exports.getAllGroups = async (access_token) => {
     try {
         const response = await fetch(url + '/all_groups', {
             method: "GET",
@@ -488,7 +488,7 @@ export const getAllGroups = async (access_token) => {
     }
 }
 
-export const deleteAllGroups = async (access_token, username, password) => {
+module.exports.deleteAllGroups = async (access_token, username, password) => {
     try {
         const response = await fetch(url + '/all_groups', {
             method: "DELETE",
@@ -516,7 +516,7 @@ export const deleteAllGroups = async (access_token, username, password) => {
     }
 }
 
-export const getGroupById = async (access_token, id) => {
+module.exports.getGroupById = async (access_token, id) => {
     try {
         const response = await fetch(url + '/groups', {
             method: "GET",
@@ -543,7 +543,7 @@ export const getGroupById = async (access_token, id) => {
     }
 }
 
-export const createGroup = async (access_token, name) => {
+module.exports.createGroup = async (access_token, name) => {
     try {
         const response = await fetch(url + '/groups', {
             method: "POST",
@@ -570,7 +570,7 @@ export const createGroup = async (access_token, name) => {
     }
 }
 
-export const joinGroup = async (access_token, id) => {
+module.exports.joinGroup = async (access_token, id) => {
     try {
         const response = await fetch(url + '/groups', {
             method: "PUT",
@@ -600,7 +600,7 @@ export const joinGroup = async (access_token, id) => {
     }
 }
 
-export const deleteGroup = async (access_token, id) => {
+module.exports.deleteGroup = async (access_token, id) => {
     try {
         const response = await fetch(url + '/groups', {
             method: "DELETE",
@@ -627,7 +627,7 @@ export const deleteGroup = async (access_token, id) => {
     }
 }
 
-export const deleteUserFromGroup = async (access_token, id, user_id) => {
+module.exports.deleteUserFromGroup = async (access_token, id, user_id) => {
     try {
         const response = await fetch(url + '/groups_users', {
             method: "DELETE",
@@ -655,7 +655,7 @@ export const deleteUserFromGroup = async (access_token, id, user_id) => {
     }
 }
 
-export const myGroups = async (access_token) => {
+module.exports.myGroups = async (access_token) => {
     try {
         const response = await fetch(url + '/my_groups', {
             method: "GET",
@@ -678,7 +678,7 @@ export const myGroups = async (access_token) => {
     }
 }
 
-export const groupsImIn = async (access_token) => {
+module.exports.groupsImIn = async (access_token) => {
     try {
         const response = await fetch(url + '/groups_im_in', {
             method: "GET",

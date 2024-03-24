@@ -1,5 +1,26 @@
-import { login } from '../api-calls/db-api.js';
 import { appState } from '../app-state.js';
+import { baseUrl } from '../base-url.js';
+
+// move this to another file and import
+const login = async (loginData) => {
+
+    try {
+
+        const response = await fetch(`${baseUrl}/api/user/login`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        });
+
+        return await response.json();
+
+    } catch (err) {
+        console.error(err.message);
+    }
+
+}
 
 export const handleLogin = async () => {
 
@@ -16,7 +37,9 @@ export const handleLogin = async () => {
         
         const responseData = await login(userFormData);
 
-        appState.newUser(responseData);
+        appState.newUser(responseData.data);
+        console.error(appState.getUserDetails())
+        window.location.href = '/main';
 
     })
 
@@ -24,11 +47,11 @@ export const handleLogin = async () => {
 
 const validateLoginData = (userFormData) => {
 
-    if (userFormData.password.length < 6) {
-        console.error('Password needs to be at least 6 letters long');
-        displayErrorMessage('Password needs to be at least 6 letters long');
-        return;
-    }
+    // if (userFormData.password.length < 6) {
+    //     console.error('Password needs to be at least 6 letters long');
+    //     displayErrorMessage('Password needs to be at least 6 letters long');
+    //     return;
+    // }
 
     cleanErroMessageField();
     return true;

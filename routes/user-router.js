@@ -5,7 +5,7 @@ const userController = require('../controllers/user-controller');
 const router = express.Router();
 
 router
-.route('/validate-login-details')
-.post()
+.route('/login')
+.post(userController.login)
 
 module.exports = router;
