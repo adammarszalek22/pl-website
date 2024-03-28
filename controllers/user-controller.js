@@ -17,7 +17,6 @@ module.exports.login = async (req, res) => {
 
 module.exports.register = async (req, res) => {
 
-    console.log(req.body)
     // Get response from pl server
     const response = await createUser(req.body);
 
