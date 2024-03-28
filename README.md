@@ -7,7 +7,7 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 # TODOS
 
 - Setup the main structure of the webserver
-- Decide where and how to store access token (server or localStorage)
+- Decide where and how to store access token (server or localStorage) - delete the app-state file as its useless
 - Create and test login and registration functionality as well as page routing once login is successful
 - Add documentation to each api call function that communicates with the python pl server (params and what it returns)
 
