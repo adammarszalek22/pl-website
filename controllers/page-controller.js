@@ -13,7 +13,7 @@ module.exports.getRegistrationPage = (req, res) => {
 }
 
 module.exports.getMainPage = (req, res) => {
-
+    console.error('here')
     res.sendFile(path.join(__dirname, '..', 'public', 'main', 'main-page.html'));
 
 }

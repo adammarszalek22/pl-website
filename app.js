@@ -1,5 +1,8 @@
 const express = require('express');
+const session = require('express-session');
 const morgan = require('morgan');
+
+const bodyParser = require('body-parser');
 
 const pageRouter = require('./routes/page-router');
 const userRouter = require('./routes/user-router');
@@ -11,7 +14,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
+app.use(session({
+    secret: "guihstirv87ntmwert7wmve09tyq9w8ytweoytw09erce9srthgsoe",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+
+}))
 
 app.use((req, _, next) => {
     req.requestTime = new Date().toISOString();
@@ -19,7 +30,7 @@ app.use((req, _, next) => {
 })
 
 const onStartUp = (req, res) => {
-    res.redirect('/login');
+    res.redirect('/registration');
 }
 
 app.use('/', pageRouter);
