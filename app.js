@@ -30,7 +30,7 @@ app.use((req, _, next) => {
 })
 
 const onStartUp = (req, res) => {
-    res.redirect('/registration');
+    res.redirect('/login');
 }
 
 app.use('/', pageRouter);

@@ -96,3 +96,26 @@ body {
     font-size: 14px; /* Set font size */
     margin-top: 5px; /* Add some space between the message and the form */
 }
+
+
+.body-coloured {
+    background: rgb(22,202,99);
+    background: linear-gradient(115deg, rgba(22,202,99,1) 25%, rgba(2,216,134,1) 50%, rgba(3,237,181,1) 75%);
+}
+
+.main-container {
+    height: 100%;
+    width:  100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.predictions-div {
+    min-width: 300px;
+    width: 40%;
+    min-height: 75%;
+    background-color: rgb(192, 185, 185);
+    opacity: 0.5;
+}
+
