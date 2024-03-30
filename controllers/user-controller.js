@@ -1,8 +1,6 @@
 const { login, createUser } = require('../pl-server-api/user');
 const { v4: uuidv4 } = require('uuid');
 
-const { initializeHomepage } = require('./homepage-controller.js');
-
 module.exports.login = async (req, res) => {
 
     // Get response from pl server
@@ -12,8 +10,6 @@ module.exports.login = async (req, res) => {
     req.session.accessToken = response.access_token;
     req.session.refreshToken = response.refresh_token;
     req.session.userId = response.user_id;
-
-    await initializeHomepage(req, res);
 
     res.redirect('/main');
     

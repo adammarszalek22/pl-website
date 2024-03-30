@@ -1,4 +1,4 @@
-const { getGameweekMatches } = require('../fantasy-api.js');
+const { footballData } = require('../fantasy-api.js');
 
 // url = "http://127.0.0.1:5000"
 const url = "https://pl-server.onrender.com"
@@ -107,10 +107,8 @@ module.exports.getAllBetsByUserId = async (access_token) => {
 
         if (response.ok) {
 
-            const getGameweek = await getGameweekMatches();
-
             const responseBody = await response.json();
-            return responseBody.map(match => ({...match, gameweek: getGameweek[match.match_id]}));
+            return responseBody.map(match => ({...match, gameweek: footballData.getGameweekFromMatchCode(match.match_id)}));
             
         } else {
 
