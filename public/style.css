@@ -130,7 +130,7 @@ body {
     max-height:10%;
     width: 100%;
     display: flex;
-    gap: 2%;
+    gap: 0.5%;
 }
 
 .team {
@@ -155,7 +155,8 @@ body {
 }
 
 .image {
-    width: 40%;
+    width: 60%;
+    max-width: 45px;
 }
 
 .vertical-center {
@@ -163,8 +164,23 @@ body {
     justify-content: center;
     align-items: center; 
     width: 50%;
+    height: 100%;
 }
 
 .name {
     min-width: 100px;
+}
+
+.score-prediction {
+    width: 50%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: rgba(225, 232, 230, 0.6);
+    border-radius: 20%;
+    text-align: center;
+}
+
+.score.input {
+    height: 30%;
 }

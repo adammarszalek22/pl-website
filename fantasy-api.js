@@ -46,6 +46,8 @@ class FootballData {
             match.team_a_image_id = imageCode[match.team_a];
             match.team_h_image_id = imageCode[match.team_h];
 
+            match.kickoff_time = new Date(match.kickoff_time);
+
             this.matchData[match.code] = match;
         }
     }
@@ -74,6 +76,10 @@ class FootballData {
 
     getFixtureData(matchCode) {
         return this.matchData[matchCode];
+    }
+
+    getKickOffTime(matchCode) {
+        return this.matchData[matchCode].kickoff_time;
     }
 }
 
