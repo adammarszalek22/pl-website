@@ -11,7 +11,7 @@ class FootballData {
         this.staticData = {};
         // All matches in an array
         this.fixturesData = [];
-        // All matches in an object (to avoid looping through the array every time)
+        // Same as this.fixturesData but has key(match): value 
         this.matchData = {};
         this.gameweeks = {};
 
@@ -19,37 +19,53 @@ class FootballData {
 
     async initializeData(staticUrl, fixturesUrl) {
 
-        const staticDataResponse = await fetch(staticUrl);
-        const fixturesResponse = await fetch(fixturesUrl);
+        try {
 
-        this.staticData = await staticDataResponse.json();
-        this.fixturesData = await fixturesResponse.json();
+            // Getting urls from the config
+            const staticUrl = process.env.FPL_STATIC_URL;
+            const fixturesUrl = process.env.FPL_FIXTURES_URL;
 
-        const teams = {};
-        const imageCode = {};
+            // Fetching data
+            const staticDataResponse = await fetch(staticUrl);
+            const fixturesResponse = await fetch(fixturesUrl);
+
+            this.staticData = await staticDataResponse.json();
+            this.fixturesData = await fixturesResponse.json();
     
-        for (const team of this.staticData.teams) {
-            teams[team.id] = team.name;
-            imageCode[team.id] = team.code;
+            const teamNames = {};
+            const teamCodes = {};
+            
+            // Quick loop to 
+            for (const team of this.staticData.teams) {
+                teamNames[team.id] = team.name;
+                teamCodes[team.id] = team.code;
+            }
+    
+            for (const match of this.fixturesData) {
+    
+                // If no gameweek is assigned we store it as 0 (rather than the original null)
+                this.gameweeks[match.event || 0] = this.gameweeks[match.event || 0] || [];
+                this.gameweeks[match.event || 0].push(match);
+                
+                // Adding team names to the match object
+                match.team_a_name = teamNames[match.team_a];
+                match.team_h_name = teamNames[match.team_h];
+                
+                // Adding team codes
+                match.team_a_code = teamCodes[match.team_a];
+                match.team_h_code = teamCodes[match.team_h];
+                
+                // Converting kickoff time to a Date object
+                match.kickoff_time = new Date(match.kickoff_time);
+                
+                this.matchData[match.code] = match;
+            
+            }
+
+        } catch(error) {
+            console.error('Error initializing data');
         }
 
-        for (const match of this.fixturesData) {
-
-
-            // If no gameweek is assigned we store it as 0 (rather than the original null)
-            this.gameweeks[match.event || 0] = this.gameweeks[match.event || 0] || [];
-            this.gameweeks[match.event || 0].push(match);
-
-            match.team_a_name = teams[match.team_a];
-            match.team_h_name = teams[match.team_h];
-
-            match.team_a_image_id = imageCode[match.team_a];
-            match.team_h_image_id = imageCode[match.team_h];
-
-            match.kickoff_time = new Date(match.kickoff_time);
-
-            this.matchData[match.code] = match;
-        }
     }
 
     getGameweekFromMatchCode(matchCode) {
@@ -61,6 +77,7 @@ class FootballData {
     }
 
     getCurrentGameweek() {
+
         for (const [ gameweek, matches ] of Object.entries(this.gameweeks)) {
             
             // Skip gameweek 0 (which means matches that are not yet assigned or are postponed)

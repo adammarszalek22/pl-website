@@ -7,12 +7,27 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="body-coloured">
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/my-account">My Account</a></li>
+            <li><a href="/my-leagues">My Leagues</a></li>
+            <li><a href="/leaderboard">Leaderboard</a></li>
+        </ul>
+    </nav>
+
     <div class="main-container">
-        <button class="carousel-button-left">LEFT</button>
+        <div class="carousel-button carousel-button-left">
+            <div class="arrow-top-left"></div>
+            <div class="arrow-bottom-left"></div>
+        </div>
         <div class="carousel">
             %PREDICTIONS%
         </div>
-        <button class="carousel-button-right">RIGHT</button>
+        <div class="carousel-button carousel-button-right">
+            <div class="arrow-top-right"></div>
+            <div class="arrow-bottom-right"></div>
+        </div>
     </div>
     <script type="module" src="home.js"></script>
 </body>

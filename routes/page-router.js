@@ -16,4 +16,16 @@ router
 .route('/main')
 .get(pageController.getMainPage);
 
+router
+.route('/my-account')
+.get(pageController.getMyAccountPage);
+
+router
+.route('/my-leagues')
+.get(pageController.getMyLeaguesPage);
+
+router
+.route('/leaderboard')
+.get(pageController.getLeaderboardPage);
+
 module.exports = router;

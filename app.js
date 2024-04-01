@@ -29,6 +29,12 @@ app.use((req, _, next) => {
     next()
 })
 
+// For development only
+app.use((req, res, next) => {
+    req.session.accessToken = req.session.accessToken || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNzExOTc4MDAzLCJqdGkiOiJjZjE1Y2UyNy1kMjhiLTQ5MjMtODcxOC1mMDQ3OTQ2OTI0NzEiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE3MTE5NzgwMDMsImNzcmYiOiJlNWZlMDFkMS03ZGY2LTQyYjktOWEyZS03NWU0OWVjYjJlOGEiLCJleHAiOjE3MTE5ODE2MDMsImlzX2FkbWluIjpmYWxzZX0.HoMclE5u-TgNQcTtivvxhC-U2C4uNaqO4dJjPIbGwuM';
+    next();
+})
+
 const onStartUp = (req, res) => {
     res.redirect('/login');
 }
