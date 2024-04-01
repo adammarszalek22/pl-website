@@ -108,7 +108,7 @@ module.exports.getAllBetsByUserId = async (access_token) => {
         if (response.ok) {
 
             const responseBody = await response.json();
-            return responseBody.map(match => ({...match, gameweek: footballData.getGameweekFromMatchCode(match.match_id)}));
+            return responseBody.map(match => ({ ...match, match_id: Number(match.match_id) }));
             
         } else {
 

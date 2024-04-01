@@ -1,9 +1,3 @@
-// Will move the urls to config file
-// Using this for teams data (id, name, etc.)
-const staticUrl = 'https://fantasy.premierleague.com/api/bootstrap-static/';
-// Matches data (kickoff time, home and away team, gameweek, goals scored, etc.)
-const fixturesUrl = 'https://fantasy.premierleague.com/api/fixtures/';
-
 class FootballData {
 
     constructor() {
@@ -14,16 +8,13 @@ class FootballData {
         // Same as this.fixturesData but has key(match): value 
         this.matchData = {};
         this.gameweeks = {};
+        this.teams = {};
 
     }
 
     async initializeData(staticUrl, fixturesUrl) {
 
         try {
-
-            // Getting urls from the config
-            const staticUrl = process.env.FPL_STATIC_URL;
-            const fixturesUrl = process.env.FPL_FIXTURES_URL;
 
             // Fetching data
             const staticDataResponse = await fetch(staticUrl);
@@ -32,13 +23,11 @@ class FootballData {
             this.staticData = await staticDataResponse.json();
             this.fixturesData = await fixturesResponse.json();
     
-            const teamNames = {};
-            const teamCodes = {};
+            this.teams = {};
             
-            // Quick loop to 
+            // Storing teams information (name, code, etc.)
             for (const team of this.staticData.teams) {
-                teamNames[team.id] = team.name;
-                teamCodes[team.id] = team.code;
+                this.teams[team.id] = team;
             }
     
             for (const match of this.fixturesData) {
@@ -48,16 +37,17 @@ class FootballData {
                 this.gameweeks[match.event || 0].push(match);
                 
                 // Adding team names to the match object
-                match.team_a_name = teamNames[match.team_a];
-                match.team_h_name = teamNames[match.team_h];
+                match.team_a_name = this.teams[match.team_a].name;
+                match.team_h_name = this.teams[match.team_h].name;
                 
                 // Adding team codes
-                match.team_a_code = teamCodes[match.team_a];
-                match.team_h_code = teamCodes[match.team_h];
+                match.team_a_code = this.teams[match.team_a].code;
+                match.team_h_code = this.teams[match.team_h].code;
                 
                 // Converting kickoff time to a Date object
                 match.kickoff_time = new Date(match.kickoff_time);
                 
+                // Storing the result in an object accessible by match code
                 this.matchData[match.code] = match;
             
             }
@@ -102,7 +92,10 @@ class FootballData {
 
 const footballData = new FootballData();
 
-// this needs to be fixed
+// Getting urls from the config
+const staticUrl = process.env.FPL_STATIC_URL;
+const fixturesUrl = process.env.FPL_FIXTURES_URL;
+
 footballData.initializeData(staticUrl, fixturesUrl);
 
 module.exports.footballData = footballData;
