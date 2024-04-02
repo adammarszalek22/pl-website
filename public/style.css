@@ -127,15 +127,11 @@ nav {
     height: 100%;
 }
 
-.slide-enter-from-right {
-    animation: slideInFromRight 0.8s forwards;
+.slide-right-to-left {
+    animation: slideRightToLeft 0.5s forwards;
 }
 
-.slide-exit-to-left {
-    animation: slideOutToLeft 0.8s forwards;
-}
-
-@keyframes slideInFromRight {
+@keyframes slideRightToLeft {
     from {
         transform: translateX(0);
     }
@@ -145,35 +141,11 @@ nav {
     }
 }
 
-@keyframes slideOutToLeft {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
+.slide-left-to-right {
+    animation: slideLeftToRight 0.5s forwards;
 }
 
-.slide-enter-from-left {
-    animation: slideInFromLeft 0.8s forwards;
-}
-
-.slide-exit-to-right {
-    animation: slideOutToRight 0.8s forwards;
-}
-
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideOutToRight {
+@keyframes slideLeftToRight {
     from {
         transform: translateX(-100%);
     }
@@ -240,7 +212,7 @@ nav {
 
 
 
-/* This is simply ugly so will replace it */
+/* These buttons are simply ugly so will replace them */
 .carousel-button {
     position: relative;
     margin: 1%;
