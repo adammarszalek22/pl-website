@@ -31,10 +31,6 @@ class FootballData {
             }
     
             for (const match of this.fixturesData) {
-    
-                // If no gameweek is assigned we store it as 0 (rather than the original null)
-                this.gameweeks[match.event || 0] = this.gameweeks[match.event || 0] || [];
-                this.gameweeks[match.event || 0].push(match);
                 
                 // Adding team names to the match object
                 match.team_a_name = this.teams[match.team_a].name;
@@ -46,6 +42,10 @@ class FootballData {
                 
                 // Converting kickoff time to a Date object
                 match.kickoff_time = new Date(match.kickoff_time);
+    
+                // If no gameweek is assigned we store it as 0 (rather than the original null)
+                this.gameweeks[match.event || 0] = this.gameweeks[match.event || 0] || [];
+                this.gameweeks[match.event || 0].push(match);
                 
                 // Storing the result in an object accessible by match code
                 this.matchData[match.code] = match;

@@ -122,7 +122,7 @@ const createPredictionsCard = async (gameweekMatchIds, userPredictions, opts = {
 
     // For each match
     for (const fixture of gameweekMatchIds) {
-
+        
         // If the user has previously submitted their predictions, we display them
         const bet = userPredictions.find(bet => bet.match_id === fixture.code);
 
@@ -132,7 +132,7 @@ const createPredictionsCard = async (gameweekMatchIds, userPredictions, opts = {
     }
 
     predictionsCard += '</div>';
-
+    
     return predictionsCard;
 
 }
@@ -142,7 +142,7 @@ const addMatchDiv = async (bet, fixture) => {
     <div class="match-div">
 
         <div class="vertical-center">
-            <div class="team home image">
+            <div class="team-image home">
                 <img src="./images/teams/${fixture.team_h_code}.png" alt="Example Image" class="team-image home">
             </div>
         </div>
@@ -167,7 +167,7 @@ const addMatchDiv = async (bet, fixture) => {
         </div>
 
         <div class="vertical-center">
-            <div class="team home image">
+            <div class="team-image away">
                 <img src="./images/teams/${fixture.team_a_code}.png" alt="Example Image" class="team-image away">
             </div>
         </div>
