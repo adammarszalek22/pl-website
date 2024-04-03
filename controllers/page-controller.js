@@ -140,7 +140,7 @@ const createPredictionsCard = async (gameweekMatchIds, userPredictions, opts = {
 const addMatchDiv = async (bet, fixture) => {
     return `
     <div class="match-div">
-
+    
         <div class="vertical-center">
             <div class="team-image home">
                 <img src="./images/teams/${fixture.team_h_code}.png" alt="Example Image" class="team-image home">

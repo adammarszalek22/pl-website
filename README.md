@@ -14,4 +14,14 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 
 - Add documentation to each api call function that communicates with the python pl server (params and what it returns)
 
+- Leaderboards,
+- Mini-leagues,
+- 
+
 - Currently the UI for login and registration was copied from another source, will implement at the very end to match the UI of the whole website
+
+# Ideas
+
+- Add more interesting things, such as guessing goal scorers, etc. (basically anything that's in a betting app)
+- Everyone to be able to see other people's guesses once they submitted their own? (or maybe when the gameweek has finished)
+- There is a lot of data on FPL API available so can display plenty of useful information about various games (who's most likely to win, who's most likely to score a goal, etc.)
