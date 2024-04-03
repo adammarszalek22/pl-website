@@ -99,7 +99,7 @@ nav {
     align-items: center;
 }
 
-.carousel {
+.card {
     background-color: rgb(185, 192, 190, 0.6);
     width: 50%;
     min-width: 350px;
@@ -110,10 +110,28 @@ nav {
     border-radius: 10px;
 }
 
+.carousel {
+    display: flex;
+    overflow: hidden;
+}
+
 .carousel-buttons {
     display: flex;
     height: 10%;
-    gap:50%
+    gap: 60%
+}
+
+.carousel-button {
+    left: 10px;
+    width: 20%;
+    margin: 1%;
+    padding: 0.8rem 1.5rem;
+    border: 0px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    color: inherit;
+    font-size: 1.3rem;
+    font-family: PremierSans-Bold, Arial, "Helvetica Neue", Helvetica, sans-seriff;
 }
 
 .carousel-item {
@@ -131,7 +149,7 @@ nav {
     width: 100%;
     display: flex;
     gap: 0.5%;
-    flex-shrink: 1;
+    /* flex-shrink: 1; */
 }
 
 .vertical-center {
@@ -143,7 +161,7 @@ nav {
 }
 
 .slide-right-to-left {
-    animation: slideRightToLeft 0.5s forwards;
+    animation: slideRightToLeft 2s forwards;
 }
 
 @keyframes slideRightToLeft {
@@ -157,7 +175,7 @@ nav {
 }
 
 .slide-left-to-right {
-    animation: slideLeftToRight 0.5s forwards;
+    animation: slideLeftToRight 2s forwards;
 }
 
 @keyframes slideLeftToRight {
