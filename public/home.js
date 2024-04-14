@@ -1,27 +1,28 @@
 const buttonRight = document.querySelector('.carousel-button-right');
+const buttonLeft = document.querySelector('.carousel-button-left');
 
 buttonRight.addEventListener('click', () => {
 
-    const children = document.querySelector('.carousel').children;
+    const carouselChildren = document.querySelector('.carousel').children;
     const theDiv = document.querySelector('.carousel-item.current');
     
-    for (let i = 0; i < 39; i++) {
+    for (let i = 0; i <= 38; i++) {
         
-        if (children[i] == theDiv) {
+        if (carouselChildren[i] == theDiv) {
 
             theDiv.classList.add('slide-right-to-left');
-            children[i+1].classList.remove('hide');
-            children[i+1].classList.add('current');
-            children[i+1].classList.add('slide-right-to-left');
+            carouselChildren[i+1].classList.remove('hide');
+            carouselChildren[i+1].classList.add('current');
+            carouselChildren[i+1].classList.add('slide-right-to-left');
 
-            document.querySelector('.current-gameweek').textContent = `Gameweek ${children[i+1].id}`;
+            document.querySelector('.current-gameweek').textContent = `Gameweek ${carouselChildren[i+1].id}`;
 
-            children[i+1].addEventListener('animationend', function animationEnd() {
+            carouselChildren[i+1].addEventListener('animationend', function animationEnd() {
                 theDiv.classList.remove('current');
                 theDiv.classList.remove('slide-right-to-left');
                 theDiv.classList.add('hide');
-                children[i+1].classList.remove('slide-right-to-left');
-                children[i+1].removeEventListener('animationend', animationEnd);
+                carouselChildren[i+1].classList.remove('slide-right-to-left');
+                carouselChildren[i+1].removeEventListener('animationend', animationEnd);
             })
             return;
         }
@@ -29,30 +30,28 @@ buttonRight.addEventListener('click', () => {
 
 })
 
-const buttonLeft = document.querySelector('.carousel-button-left');
-
 buttonLeft.addEventListener('click', () => {
 
-    const children = document.querySelector('.carousel').children;
+    const carouselChildren = document.querySelector('.carousel').children;
     const theDiv = document.querySelector('.carousel-item.current');
 
     for (let i = 38; i >= 0; i--) {
 
-        if (children[i] == theDiv) {
+        if (carouselChildren[i] == theDiv) {
 
-            children[i-1].classList.remove('hide');
-            children[i-1].classList.add('current');
-            children[i-1].classList.add('slide-left-to-right');
+            carouselChildren[i-1].classList.remove('hide');
+            carouselChildren[i-1].classList.add('current');
+            carouselChildren[i-1].classList.add('slide-left-to-right');
             theDiv.classList.add('slide-left-to-right');
             
-            document.querySelector('.current-gameweek').textContent = `Gameweek ${children[i-1].id}`;
+            document.querySelector('.current-gameweek').textContent = `Gameweek ${carouselChildren[i-1].id}`;
 
-            children[i-1].addEventListener('animationend', function animationEnd() {
+            carouselChildren[i-1].addEventListener('animationend', function animationEnd() {
                 theDiv.classList.remove('current');
                 theDiv.classList.remove('slide-left-to-right');
                 theDiv.classList.add('hide');
-                children[i-1].classList.remove('slide-left-to-right');
-                children[i-1].removeEventListener('animationend', animationEnd);
+                carouselChildren[i-1].classList.remove('slide-left-to-right');
+                carouselChildren[i-1].removeEventListener('animationend', animationEnd);
             })
             return;
         }

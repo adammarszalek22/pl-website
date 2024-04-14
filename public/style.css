@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
+* {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
     background-color: #f0f0f0;
@@ -133,7 +138,6 @@ button.carousel-bar-item {
     border: 0px;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.6);
-    color: inherit;
     font-size: 1.3rem;
 }
 
