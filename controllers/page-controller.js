@@ -50,7 +50,7 @@ module.exports.getMainPage = async (req, res) => {
             const gameweekMatchIds = footballData.getGameweekMatches(i);
             
             // Creating the HTML element that holds all games/scores/predictions of the given gameweek
-            predictionsCard += await createPredictionsCard(gameweekMatchIds, userPredictions, { current: currentGameweek === i });
+            predictionsCard += await createPredictionsCard(gameweekMatchIds, userPredictions, i, { current: currentGameweek === i });
 
         }
 
@@ -58,7 +58,7 @@ module.exports.getMainPage = async (req, res) => {
         const rawHtml = await fs.promises.readFile(`${__dirname}/../public/main-page.html`, 'utf-8');
 
         // Amending the HTML
-        const completeHtml = rawHtml.replace('%PREDICTIONS%', predictionsCard);
+        const completeHtml = rawHtml.replace('%PREDICTIONS%', predictionsCard).replace('%GAMEWEEK%', `Gameweek ${currentGameweek}`);
 
         // Sending the complete HTML to the client
         res.send(completeHtml);
@@ -115,10 +115,10 @@ module.exports.getLeaderboardPage = (req, res) => {
     }
 }
 
-const createPredictionsCard = async (gameweekMatchIds, userPredictions, opts = {}) => {
+const createPredictionsCard = async (gameweekMatchIds, userPredictions, currentGameweek, opts = {}) => {
 
     // Creating a carousel item for the given gameweek
-    let predictionsCard = `<div class="carousel-item${opts.current ? ' current' : ' hide'}">`;
+    let predictionsCard = `<div class="carousel-item${opts.current ? ' current' : ' hide'}" id="${currentGameweek}">`;
 
     // For each match
     for (const fixture of gameweekMatchIds) {

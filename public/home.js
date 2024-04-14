@@ -14,6 +14,8 @@ buttonRight.addEventListener('click', () => {
             children[i+1].classList.add('current');
             children[i+1].classList.add('slide-right-to-left');
 
+            document.querySelector('.current-gameweek').textContent = `Gameweek ${children[i+1].id}`;
+
             children[i+1].addEventListener('animationend', function animationEnd() {
                 theDiv.classList.remove('current');
                 theDiv.classList.remove('slide-right-to-left');
@@ -42,6 +44,8 @@ buttonLeft.addEventListener('click', () => {
             children[i-1].classList.add('current');
             children[i-1].classList.add('slide-left-to-right');
             theDiv.classList.add('slide-left-to-right');
+            
+            document.querySelector('.current-gameweek').textContent = `Gameweek ${children[i-1].id}`;
 
             children[i-1].addEventListener('animationend', function animationEnd() {
                 theDiv.classList.remove('current');
