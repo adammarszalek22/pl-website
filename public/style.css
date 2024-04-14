@@ -134,11 +134,14 @@ nav {
 }
 
 button.carousel-bar-item {
-    padding: 0.8rem 2.5rem;
+    padding: 0.8rem 2.3rem;
     border: 0px;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.6);
     font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .current-gameweek {
@@ -163,6 +166,7 @@ button.carousel-bar-item {
 .match-div {
     display: flex;
     gap: 0.5%;
+    max-height: 16px;
 }
 
 .vertical-center {
@@ -228,12 +232,12 @@ button.carousel-bar-item {
 } 
 
 .team-image img {
-    min-width: 30px;
-    min-height: 30px;
-    max-height: 50px;
-    max-height: 50px;
-    width: 70%;
-    height: 70%;
+    /* min-width: 20px;
+    min-height: 20px;
+    max-height: 40px;
+    max-height: 40px; */
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .name {

@@ -112,7 +112,7 @@ module.exports.getAllBetsByUserId = async (access_token) => {
             
         } else {
 
-            console.error('Request failed:', response.statusText);
+            console.error('Request failed:', response.statusTex);
             return { "status_code": response.status };
 
         }

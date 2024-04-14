@@ -6,7 +6,7 @@ buttonRight.addEventListener('click', () => {
     const carouselChildren = document.querySelector('.carousel').children;
     const theDiv = document.querySelector('.carousel-item.current');
     
-    for (let i = 0; i <= 38; i++) {
+    for (let i = 0; i <= 36; i++) {
         
         if (carouselChildren[i] == theDiv) {
 
@@ -35,14 +35,14 @@ buttonLeft.addEventListener('click', () => {
     const carouselChildren = document.querySelector('.carousel').children;
     const theDiv = document.querySelector('.carousel-item.current');
 
-    for (let i = 38; i >= 0; i--) {
+    for (let i = 37; i >= 1; i--) {
 
         if (carouselChildren[i] == theDiv) {
 
+            theDiv.classList.add('slide-left-to-right');
             carouselChildren[i-1].classList.remove('hide');
             carouselChildren[i-1].classList.add('current');
             carouselChildren[i-1].classList.add('slide-left-to-right');
-            theDiv.classList.add('slide-left-to-right');
             
             document.querySelector('.current-gameweek').textContent = `Gameweek ${carouselChildren[i-1].id}`;
 
