@@ -35,7 +35,7 @@ buttonLeft.addEventListener('click', () => {
     const carouselChildren = document.querySelector('.carousel').children;
     const theDiv = document.querySelector('.carousel-item.current');
 
-    for (let i = 37; i >= 1; i--) {
+    for (let i = 1; i <= 37; i++) {
 
         if (carouselChildren[i] == theDiv) {
 

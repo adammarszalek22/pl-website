@@ -146,7 +146,6 @@ module.exports.myUserInfo = async (access_token, id) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);

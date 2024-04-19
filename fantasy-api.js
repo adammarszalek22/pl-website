@@ -10,6 +10,8 @@ class FootballData {
         this.gameweeks = {};
         this.teams = {};
 
+        this.currentGameweek = 1;
+
     }
 
     async initializeData(staticUrl, fixturesUrl) {
@@ -52,6 +54,8 @@ class FootballData {
             
             }
 
+            this.findCurrentGameweek();
+
         } catch(error) {
             console.error('Error initializing data');
         }
@@ -66,7 +70,7 @@ class FootballData {
         return this.gameweeks[gameweek];
     }
 
-    getCurrentGameweek() {
+    findCurrentGameweek() {
 
         for (const [ gameweek, matches ] of Object.entries(this.gameweeks)) {
             
@@ -75,10 +79,33 @@ class FootballData {
 
             // If a match has not yet finished then this is the current gameweek
             for (const match of matches) {
-                if (!match.finished) return match.event;
+                if (!match.finished) {
+                    this.currentGameweek = match.event;
+                    return;
+                }
             }
         }
 
+    }
+
+    getCurrentGameweek() {
+
+        return this.currentGameweek;
+
+    }
+
+    hasGameweekStarted(gameweek) {
+
+        for (const match of this.gameweeks[gameweek]) {
+            if (match.started) return true;
+        }
+
+        return false;
+
+    }
+
+    hasCurrentGameweekStarted() {
+        return hasGameweekStarted(this.currentGameweek);
     }
 
     getFixtureData(matchCode) {

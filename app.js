@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 const pageRouter = require('./routes/page-router');
 const userRouter = require('./routes/user-router');
+const scoresRouter = require('./routes/scores-router');
 
 const app = express();
 
@@ -35,6 +36,7 @@ const onStartUp = (req, res) => {
 
 app.use('/', pageRouter);
 app.use('/api/user', userRouter);
+app.use('/api/pl', scoresRouter);
 
 app.get('/', onStartUp);
 

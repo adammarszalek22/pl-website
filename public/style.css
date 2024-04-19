@@ -102,11 +102,32 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5%;
 }
+
+/* User Details */
+.my-account {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.my-account-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+/* Score guesses */
 
 .card {
     background-color: rgb(185, 192, 190, 0.6);
-    width: 50%;
+    width: 40%;
     min-width: 350px;
     height: 80%;
     display: flex;
@@ -115,10 +136,16 @@ nav {
     border-radius: 10px;
 }
 
+.white {
+    background: rgba(255, 255, 255, 0.6);
+}
+
 .carousel {
     display: flex;
     overflow: hidden;
     height: 100%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .carousel-buttons {
@@ -149,24 +176,37 @@ button.carousel-bar-item {
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+    font-weight: bold;
 }
 
 .carousel-item {
-    height: 90%;
+    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center; */
+}
+
+.submit-scores-form {
+    height: 100%;
     width: 100%;
     min-width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: space-evenly;
     align-items: center;
-    padding-top: 2%;
-    padding-bottom: 2%;
 }
 
 .match-div {
     display: flex;
-    gap: 0.5%;
-    max-height: 16px;
+    height: 100%;
+}
+
+.exact {
+    background-color: rgba(16, 178, 232, 0.6);
 }
 
 .vertical-center {
@@ -206,7 +246,7 @@ button.carousel-bar-item {
 }
 
 .current {
-    display: flex;
+    display: block;
 }
 
 .hide {

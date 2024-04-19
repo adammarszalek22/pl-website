@@ -20,7 +20,7 @@ module.exports.getBet = async (access_token, id) => {
             console.error('Request failed:', response.statusText);
             return null;
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
@@ -43,7 +43,7 @@ module.exports.deleteBet = async (access_token, id) => {
             console.error('Request failed:', response.statusText);
             return null;
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
@@ -66,7 +66,7 @@ module.exports.deleteAllBets = async (access_token) => {
             console.error('Request failed:', response.statusText);
             return null;
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
@@ -89,7 +89,7 @@ module.exports.getAllBets = async (access_token) => {
             console.error('Request failed:', response.statusText);
             return { "status_code": response.status };
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
@@ -109,14 +109,14 @@ module.exports.getAllBetsByUserId = async (access_token) => {
 
             const responseBody = await response.json();
             return responseBody.map(match => ({ ...match, match_id: Number(match.match_id) }));
-            
+
         } else {
 
             console.error('Request failed:', response.statusTex);
             return { "status_code": response.status };
 
         }
-    } catch(err) {
+    } catch (err) {
 
         console.error('An error occurred:', err);
         return null;
@@ -151,7 +151,7 @@ module.exports.postBet = async (access_token, match_id, goal1, goal2) => {
             console.error('Request failed:', response.statusText);
             return null;
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
@@ -184,7 +184,7 @@ module.exports.updateBet = async (access_token, match_id, goal1, goal2) => {
             console.error('Request failed:', response.statusText);
             return null;
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
@@ -213,8 +213,47 @@ module.exports.updateMultipleBets = async (access_token, list_match_id, list_goa
             console.error('Request failed:', response.statusText);
             return { "status_code": response.status };
         }
-    } catch(err) {
+    } catch (err) {
         console.error('An error occurred:', err);
         return null;
     }
 }
+
+module.exports.updateMultipleBetsNew = async (access_token, bets) => {
+    try {
+        const response = await fetch(url + '/multiple_bets_update_new', {
+            method: "PUT",
+            headers: {
+                "Authorization": "Bearer " + access_token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bets)
+        });
+
+        if (response.ok) {
+            return await response.json();
+        } else {
+            console.error('Request failed:', response.statusText);
+            return { "status_code": response.status };
+        }
+    } catch (err) {
+        console.error('An error occurred:', err);
+        return null;
+    }
+}
+
+// testData = {
+//     'match_id': {
+//         '2367792': { goal1: 1, goal2: 3 },
+//         '2367878': { goal1: 1, goal2: 2 },
+//         '2367879': { goal1: 1, goal2: 2 },
+//         '2367880': { goal1: 1, goal2: 2 },
+//         '2367881': { goal1: 1, goal2: 2 },
+//         '2367882': { goal1: 1, goal2: 2 },
+//         '2367883': { goal1: 1, goal2: 2 },
+//         '2367884': { goal1: 1, goal2: 2 },
+//         '2367885': { goal1: 1, goal2: 2 },
+//         '2367886': { goal1: 1, goal2: 2 },
+//         '2367887': { goal1: 1, goal2: 2 }
+//     }
+// }

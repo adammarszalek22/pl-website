@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs')
 
 const { getAllBetsByUserId } = require('../pl-server-api/bets');
+const { myUserInfo } = require('../pl-server-api/user');
 const { footballData } = require('../fantasy-api.js');
 
 module.exports.getLoginPage = (req, res) => {
@@ -38,19 +39,23 @@ module.exports.getMainPage = async (req, res) => {
         // Getting the current gameweek
         const currentGameweek = footballData.getCurrentGameweek();
 
+        // Getting user's main details
+        const userDetails = await myUserInfo(req.session.accessToken, req.session.userId)
+
         // Getting all of user's predictions
         const userPredictions = await getAllBetsByUserId(req.session.accessToken);
 
         let predictionsCard = '';
 
         // For each gamewweek in the season
-        for (let i = 1; i <= 38; i++) {
+        for (let gameweek = 1; gameweek <= 38; gameweek++) {
 
             // Getting the matches from that gameweek
-            const gameweekMatchIds = footballData.getGameweekMatches(i);
+            const gameweekMatchIds = footballData.getGameweekMatches(gameweek);
             
             // Creating the HTML element that holds all games/scores/predictions of the given gameweek
-            predictionsCard += await createPredictionsCard(gameweekMatchIds, userPredictions, i, { current: currentGameweek === i });
+            const opts = { current: currentGameweek === gameweek, hasGameweekStarted: footballData.hasGameweekStarted(gameweek) }
+            predictionsCard += await createPredictionsCard(gameweekMatchIds, userPredictions, gameweek, opts);
 
         }
 
@@ -58,7 +63,14 @@ module.exports.getMainPage = async (req, res) => {
         const rawHtml = await fs.promises.readFile(`${__dirname}/../public/main-page.html`, 'utf-8');
 
         // Amending the HTML
-        const completeHtml = rawHtml.replace('%PREDICTIONS%', predictionsCard).replace('%GAMEWEEK%', `Gameweek ${currentGameweek}`);
+        const completeHtml = rawHtml
+        .replace('%USERNAME%', userDetails.username)
+        .replace('%POINTS%', userDetails.points)
+        .replace('%GLOBAL_RANK%', userDetails.position)
+        .replace('%ONE_POINTERS%', userDetails.one_pointers)
+        .replace('%THREE_POINTERS%', userDetails.three_pointers)
+        .replace('%PREDICTIONS%', predictionsCard)
+        .replace('%GAMEWEEK%', `Gameweek ${currentGameweek}`);
 
         // Sending the complete HTML to the client
         res.send(completeHtml);
@@ -115,31 +127,41 @@ module.exports.getLeaderboardPage = (req, res) => {
     }
 }
 
-const createPredictionsCard = async (gameweekMatchIds, userPredictions, currentGameweek, opts = {}) => {
+const createPredictionsCard = async (gameweekMatchIds, userPredictions, gameweek, opts = {}) => {
 
     // Creating a carousel item for the given gameweek
-    let predictionsCard = `<div class="carousel-item${opts.current ? ' current' : ' hide'}" id="${currentGameweek}">`;
-
+    let predictionsCard = `
+    <div class="carousel-item${opts.current ? ' current' : ' hide'}" id="${gameweek}">
+        <form id="gameweek-scores-form-${gameweek}" class="submit-scores-form" action="/api/pl/submit-scores" method="POST">
+    `;
+    
     // For each match
     for (const fixture of gameweekMatchIds) {
-        
+
         // If the user has previously submitted their predictions, we display them
         const bet = userPredictions.find(bet => bet.match_id === fixture.code);
 
         // Add the current fixture to the div
-        predictionsCard += await addMatchDiv(bet, fixture);
+        predictionsCard += await addMatchDiv(bet, fixture, opts.hasGameweekStarted);
 
     }
 
-    predictionsCard += '</div>';
+    predictionsCard += `
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+    `;
     
     return predictionsCard;
 
 }
 
-const addMatchDiv = async (bet, fixture) => {
+const addMatchDiv = async (bet, fixture, hasGameweekStarted) => {
+
+    const exactScoreGuessed = fixture.team_h_score === bet?.goal1 && fixture.team_a_score === bet?.goal2;
+
     return `
-    <div class="match-div">
+    <div class="match-div${exactScoreGuessed ? ' exact' : ''}">
     
         <div class="vertical-center">
             <div class="team-image home">
@@ -154,10 +176,10 @@ const addMatchDiv = async (bet, fixture) => {
             <div class="score home">${fixture.started ? Number(fixture.team_h_score) : ''}</div>
         </div>
         <div class="vertical-center">
-            <div class="score home input"><input class="score-prediction" value="${bet?.goal1 ?? ''}"></div>
+            <div class="score home input"><input class="score-prediction"${hasGameweekStarted ? ' disabled' : ''} value="${bet?.goal1 ?? ''}" name="predictions[${fixture.code}][goal1]"></div>
         </div>
         <div class="vertical-center">
-            <div class="score away input"><input class="score-prediction" value="${bet?.goal2 ?? ''}"></div>
+            <div class="score away input"><input class="score-prediction"${hasGameweekStarted ? ' disabled' : ''} value="${bet?.goal2 ?? ''}" name="predictions[${fixture.code}][goal2]"></div>
         </div>
         <div class="vertical-center">
             <div class="score away">${fixture.started ? Number(fixture.team_a_score) : ''}</div>
