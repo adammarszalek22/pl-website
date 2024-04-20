@@ -1,5 +1,10 @@
 const buttonRight = document.querySelector('.carousel-button-right');
 const buttonLeft = document.querySelector('.carousel-button-left');
+const submitButton = document.querySelector('#submit-scores');
+
+submitButton.addEventListener('click', () => {
+    document.querySelector('.carousel-item.current').querySelector('form').submit();
+})
 
 buttonRight.addEventListener('click', () => {
 

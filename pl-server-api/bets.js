@@ -220,7 +220,9 @@ module.exports.updateMultipleBets = async (access_token, list_match_id, list_goa
 }
 
 module.exports.updateMultipleBetsNew = async (access_token, bets) => {
+
     try {
+
         const response = await fetch(url + '/multiple_bets_update_new', {
             method: "PUT",
             headers: {
@@ -236,6 +238,7 @@ module.exports.updateMultipleBetsNew = async (access_token, bets) => {
             console.error('Request failed:', response.statusText);
             return { "status_code": response.status };
         }
+        
     } catch (err) {
         console.error('An error occurred:', err);
         return null;

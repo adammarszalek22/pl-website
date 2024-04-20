@@ -147,7 +147,6 @@ const createPredictionsCard = async (gameweekMatchIds, userPredictions, gameweek
     }
 
     predictionsCard += `
-            <button type="submit">SUBMIT</button>
         </form>
     </div>
     `;

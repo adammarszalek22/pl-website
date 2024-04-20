@@ -72,7 +72,6 @@ module.exports.getAllUsers = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
@@ -100,7 +99,6 @@ module.exports.getNonFreshToken = async (refresh_token, username, password) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
             return responseBody.access_token;
         } else {
             console.error('Request failed:', response.statusText);
@@ -123,7 +121,6 @@ module.exports.revokeJWT = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
@@ -238,7 +235,6 @@ module.exports.deleteAccount = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);

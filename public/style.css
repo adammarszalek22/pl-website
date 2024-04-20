@@ -154,10 +154,22 @@ nav {
     height: 10%;
 }
 
+.carousel-buttons-bottom {
+    display: flex;
+    justify-content: space-evenly;
+    height: 10%;
+}
+
 .carousel-bar-item {
-    left: 10px;
     margin: 1%;
     font-family: PremierSans-Bold, Arial, "Helvetica Neue", Helvetica, sans-seriff;
+}
+
+#submit-scores {
+    border: 0px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
 }
 
 button.carousel-bar-item {
