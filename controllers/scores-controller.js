@@ -1,14 +1,18 @@
 const { updateMultipleBetsNew } = require('../pl-server-api/bets');
+const { groupsImIn, myGroups } = require('../pl-server-api/leagues');
 
 module.exports.submitScores = async (req, res) => {
 
-    // Get response from pl server
-    console.log(req.body)
-
     const data = await updateMultipleBetsNew(req.session.accessToken, req.body);
 
-    console.log(data);
+    const data2 = await groupsImIn(req.session.accessToken);
 
-    // res.redirect('/main');
+    const data3 = await myGroups(req.session.accessToken)
+
+    console.log(data2)
+
+    console.log(data3.leagues[0].user)
+
+    res.redirect('/main');
     
 }

@@ -202,11 +202,10 @@ module.exports.myGroups = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
-            return { "status_code": response.status, "list": responseBody };
+            return { "status_code": response.status, "leagues": responseBody };
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status, "list": [] };
+            return { "status_code": response.status, "leagues": [] };
         }
     } catch(err) {
         console.error('An error occurred:', err);
@@ -225,11 +224,10 @@ module.exports.groupsImIn = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
-            return { "status_code": response.status, "list": responseBody };
+            return { "status_code": response.status, "leagues": responseBody };
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status, "list": [] };
+            return { "status_code": response.status, "leagues": [] };
         }
     } catch(err) {
         console.error('An error occurred:', err);

@@ -3,28 +3,10 @@
 * {
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 
-body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 
-nav {
-    width: 100%;
-    height: 10%;
-    background-color: white;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
 
 /* ---------- NAVBAR ---------- */
 
@@ -92,24 +74,14 @@ nav {
 
 /* ---------- HOMEPAGE ---------- */
 
-.body-coloured {
-    background: linear-gradient(115deg, rgba(22, 202, 99, 1) 25%, rgba(2, 216, 134, 1) 50%, rgba(3, 237, 181, 1) 75%);
-}
 
-.main-container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5%;
-}
 
 /* User Details */
 .my-account {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    width: 100%;
     height: 100%;
 }
 
@@ -118,23 +90,54 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: 100%;
-    width: 100%;
     text-align: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Score guesses */
 
+/* PROBLEM TO BE SOLVED */
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.body-coloured {
+    background: linear-gradient(115deg, rgba(22, 202, 99, 1) 25%, rgba(2, 216, 134, 1) 50%, rgba(3, 237, 181, 1) 75%);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    background-color: white;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    justify-content: space-evenly;
+}
+
 .card {
     background-color: rgb(185, 192, 190, 0.6);
-    width: 40%;
-    min-width: 350px;
-    height: 80%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     border-radius: 10px;
 }
+
+
+
+
+/* END OF */
 
 .white {
     background: rgba(255, 255, 255, 0.6);
@@ -143,9 +146,7 @@ nav {
 .carousel {
     display: flex;
     overflow: hidden;
-    height: 100%;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    height: 80%;
 }
 
 .carousel-buttons {
@@ -195,38 +196,117 @@ button.carousel-bar-item {
     height: 100%;
     width: 100%;
     min-width: 100%;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center; */
 }
 
 .submit-scores-form {
     height: 100%;
     width: 100%;
-    min-width: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     justify-content: space-evenly;
     align-items: center;
 }
 
 .match-div {
-    display: flex;
     height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
+
+
+
+
+
+/* Extra small devices (phones,  landscape phones) */
+@media (max-width: 575.98px) {
+    /* CSS rules for extra small devices */
+}
+
+/* Small devices (portrait tablets, small desktops) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    
+    body {
+        height: 150vh;
+    }
+
+    nav {
+        height: 10vh;
+    }
+
+    .main-container {
+        flex-direction: column;
+        height: 150vh;
+        padding-top: 10vh;
+    }
+
+    .card {
+        width: 70%;
+        height: 60vh;
+    }
+}
+
+/* Medium devices (tablets, large phones, landscape tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    body {
+        height: 100vh;
+    }
+
+    nav {
+        height: 10vh;
+    }
+
+    .main-container {
+        flex-direction: row;
+        height: 100vh;
+        padding-top: 10vh;
+    }
+
+    .card {
+        width: 45%;
+        height: 60vh;
+    }
+
+}
+
+/* Large devices (desktops, large tablets) */
+@media (min-width: 992px) {
+
+    body {
+        height: 100vh;
+    }
+
+    nav {
+        height: 10vh;
+    }
+
+    .main-container {
+        flex-direction: row;
+        height: 100vh;
+        padding-top: 10vh;
+    }
+
+    .card {
+        width: 40%;
+        height: 60vh;
+    }
+
+    
+
+}
+
+
+
+
+
+
+
 
 .exact {
     background-color: rgba(16, 178, 232, 0.6);
-}
-
-.vertical-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 100%;
 }
 
 .slide-right-to-left {
@@ -266,11 +346,6 @@ button.carousel-bar-item {
 }
 
 
-
-.team {
-    width: 100%;
-}
-
 .home {
     text-align: right;
 }
@@ -279,26 +354,17 @@ button.carousel-bar-item {
     text-align: left;
 }
 
-.score.input {
-    padding: 5%;
-} 
-
-.team-image img {
-    /* min-width: 20px;
-    min-height: 20px;
-    max-height: 40px;
-    max-height: 40px; */
-    width: 1.5rem;
-    height: 1.5rem;
+img.team-image {
+    width: 1.3rem;
+    height: 1.3rem;
 }
 
 .name {
-    min-width: 100px;
+    width: 30%;
 }
 
 .score-prediction {
-    width: 50%;
-    height: 100%;
+    width: 5%;
     border: none;
     outline: none;
     background-color: rgba(225, 232, 230, 0.6);

@@ -1,31 +1,31 @@
 const express = require('express');
 
-const pageController = require('../controllers/page-controller');
+const loginPageController = require('../controllers/page-controllers/login-controller');
+const registrationPageController = require('../controllers/page-controllers/registration-controller');
+const mainPageController = require('../controllers/page-controllers/main-page-controller');
+const leaguesPageController = require('../controllers/page-controllers/leagues-controller');
+const leaderboardPageController = require('../controllers/page-controllers/leaderboard-controller');
 
 const router = express.Router();
 
 router
 .route('/login')
-.get(pageController.getLoginPage);
+.get(loginPageController.getLoginPage);
 
 router
 .route('/registration')
-.get(pageController.getRegistrationPage);
+.get(registrationPageController.getRegistrationPage);
 
 router
 .route('/main')
-.get(pageController.getMainPage);
-
-router
-.route('/my-account')
-.get(pageController.getMyAccountPage);
+.get(mainPageController.getMainPage);
 
 router
 .route('/my-leagues')
-.get(pageController.getMyLeaguesPage);
+.get(leaguesPageController.getMyLeaguesPage);
 
 router
 .route('/leaderboard')
-.get(pageController.getLeaderboardPage);
+.get(leaderboardPageController.getLeaderboardPage);
 
 module.exports = router;
