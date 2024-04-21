@@ -222,7 +222,26 @@ button.carousel-bar-item {
 
 /* Extra small devices (phones,  landscape phones) */
 @media (max-width: 575.98px) {
-    /* CSS rules for extra small devices */
+
+    body {
+        height: 150vh;
+    }
+
+    nav {
+        height: 10vh;
+    }
+
+    .main-container {
+        flex-direction: column;
+        height: 150vh;
+        padding-top: 10vh;
+    }
+
+    .card {
+        width: 70%;
+        height: 60vh;
+    }
+    
 }
 
 /* Small devices (portrait tablets, small desktops) */
