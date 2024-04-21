@@ -390,3 +390,33 @@ img.team-image {
     border-radius: 20%;
     text-align: center;
 }
+
+
+
+/*  */
+
+.main-leagues-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+
+.my-leagues {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    width: 100%;
+    height: 100%;
+}
+
+.league-small {
+    background-color: #fff;
+    width: 60%;
+}
+
+.league-row {
+    display: flex;
+    justify-content: space-evenly;
+}

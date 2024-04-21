@@ -191,8 +191,15 @@ module.exports.deleteUserFromGroup = async (access_token, id, user_id) => {
     }
 }
 
-module.exports.myGroups = async (access_token) => {
+/**
+ * Fetches the user's leagues from the server (only the ones that the user is an admin of)
+ * @param {string} access_token - The access token for authentication.
+ * @returns {object|null} An object containing the status code and leagues data if successful, or null if an error occurred.
+ */
+module.exports.myLeagues = async (access_token) => {
+    
     try {
+
         const response = await fetch(url + '/my_groups', {
             method: "GET",
             headers: {
@@ -207,14 +214,24 @@ module.exports.myGroups = async (access_token) => {
             console.error('Request failed:', response.statusText);
             return { "status_code": response.status, "leagues": [] };
         }
+
     } catch(err) {
+
         console.error('An error occurred:', err);
         return null;
+
     }
 }
 
-module.exports.groupsImIn = async (access_token) => {
+/**
+ * Fetches the user's leagues from the server (the ones that the user is not an admin of)
+ * @param {string} access_token - The access token for authentication.
+ * @returns {object|null} An object containing the status code and leagues data if successful, or null if an error occurred.
+ */
+module.exports.leagues = async (access_token) => {
+
     try {
+
         const response = await fetch(url + '/groups_im_in', {
             method: "GET",
             headers: {
@@ -229,8 +246,11 @@ module.exports.groupsImIn = async (access_token) => {
             console.error('Request failed:', response.statusText);
             return { "status_code": response.status, "leagues": [] };
         }
+
     } catch(err) {
+
         console.error('An error occurred:', err);
         return null;
+        
     }
 }
