@@ -201,6 +201,39 @@ module.exports.firstTen = async (access_token) => {
     }
 }
 
+// TODO
+module.exports.getUsers = async (access_token, page, limit, sortBy) => {
+
+    try {
+
+        if (!['username', 'points', 'position', 'three_pointers', 'one_pointers'].includes(sortBy)) {
+            throw new Error(`Cannot sort by "${sortBy}"`);
+        }
+
+        const apiUrl = `${url}/users?sort_by=${sortBy}&page=${page}&limit=${limit}`;
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + access_token
+            }
+        });
+
+        if (response.ok) {
+            const responseBody = await response.json();
+            return responseBody;
+        } else {
+            console.error('Request failed:', response.statusText);
+            return null;
+        }
+
+    } catch(err) {
+
+        console.error('An error occurred:', err);
+        return null;
+
+    }
+}
+
 module.exports.getByUsername = async (access_token, username) => {
     try {
         const response = await fetch(url + '/user?username=' + username, {

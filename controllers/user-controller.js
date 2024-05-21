@@ -11,7 +11,8 @@ module.exports.login = async (req, res) => {
     req.session.refreshToken = response.refresh_token;
     req.session.userId = response.user_id;
 
-    res.redirect('/main');
+    res.redirect('/leaderboard'); // dev
+    // res.redirect('/main');
     
 }
 

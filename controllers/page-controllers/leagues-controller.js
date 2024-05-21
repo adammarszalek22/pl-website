@@ -49,6 +49,7 @@ const addLeagueDiv = (league) => {
 
     let leagueDiv = `
     <div class="league-small">
+        <div class="league-name">${league.name}</div>
         <div class="league-row league-headings">
             <p>User</p>
             <p>Position</p>

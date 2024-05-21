@@ -380,7 +380,7 @@ img.team-image {
 
 /*  */
 
-.main-leagues-container {
+.main-leagues-container, .main-leaderboard-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -425,6 +425,11 @@ img.team-image {
     padding-left: 3%;
     padding-right: 3%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.league-name {
+    text-align: center;
+    font-weight: bold;
 }
 
 @media (max-width: 1100px) {
@@ -476,3 +481,41 @@ img.team-image {
     background-color: rgba(255, 255, 255, 1);
 }
 
+
+
+
+.leaderboard {
+    background-color: rgba(225, 232, 230, 0.6);
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.leaderboard-headings {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.leaderboard-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
