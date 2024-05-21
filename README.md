@@ -24,4 +24,6 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 
 - Add more interesting things, such as guessing goal scorers, etc. (basically anything that's in a betting app)
 - Everyone to be able to see other people's guesses once they submitted their own? (or maybe when the gameweek has finished)
-- There is a lot of data on FPL API available so can display plenty of useful information about various games (who's most likely to win, who's most likely to score a goal, etc.)
+- There is a lot of data on FPL API (or other apis) available so can display plenty of useful information about various games
+    - maybe create an algorithm to calculate probability of the team winning a match?
+    - create a statistics page

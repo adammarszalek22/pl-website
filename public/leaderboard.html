@@ -11,15 +11,15 @@
     <nav class="navbar">
         <ul>
             <li><a href="/main">Homepage</a></li>
-            <li><a href="/my-leageus">My Leagues</a></li>
+            <li><a href="/my-leagues">My Leagues</a></li>
         </ul>
     </nav>
 
     <div class="main-leaderboard-container">
         <div class="leaderboard">
             <div class="leaderboard-headings">
-                <p>User</p>
                 <p>Position</p>
+                <p>User</p>
                 <p>Points</p>
                 <p>One pointers</p>
                 <p>Exact Scores</p>
@@ -27,8 +27,26 @@
             <div class="leaderboard-content">
                 %LEADERBOARD_CONTENT%
             </div>
+            <form class="carousel-buttons" action="/leaderboard?page=2" method="get">
+                <button class="carousel-bar-item left" onclick="prevPage()"><</button>
+                <p class="carousel-bar-item page-id">%PAGE%</p>
+                <button class="carousel-bar-item right" onclick="nextPage()">></button>
+                <input type="hidden" name="page" id="pageInput">
+            </form>
         </div>
     </div>
+    <script>    
+    function prevPage() {
+        var currentPage = parseInt(document.querySelector('.page-id').textContent);
+        document.getElementById('pageInput').value = currentPage - 1;
+        document.getElementById('paginationForm').submit();
+    }
 
+    function nextPage() {
+        var currentPage = parseInt(document.querySelector('.page-id').textContent);
+        document.getElementById('pageInput').value = currentPage + 1;
+        document.getElementById('paginationForm').submit();
+    }
+    </script>
 </body>
 </html>
