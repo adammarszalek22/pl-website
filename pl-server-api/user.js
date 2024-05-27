@@ -52,7 +52,7 @@ module.exports.login = async (userData) => {
         })
 
         if (response.ok) {
-            return await response.json();
+            return { ...await response.json(), username: userData.username };
         }
 
     } catch(err) {
@@ -236,7 +236,8 @@ module.exports.getUsers = async (access_token, page, limit, sortBy) => {
 
 module.exports.getByUsername = async (access_token, username) => {
     try {
-        const response = await fetch(url + '/user?username=' + username, {
+
+        const response = await fetch(url + '/user/' + username , {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + access_token
@@ -245,12 +246,12 @@ module.exports.getByUsername = async (access_token, username) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            console.log(responseBody);
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
             return { "status_code": response.status };
         }
+
     } catch(err) {
         console.error('An error occurred:', err);
         return null;

@@ -24,7 +24,7 @@ module.exports.getMainPage = async (req, res) => {
             // Getting user's main details and getting all of user's predictions
             userDetails = await getByUsername(req.session.accessToken, username);
             userPredictions = await getAllBetsByUserId(req.session.accessToken, userDetails.id);
-
+            
             userCache.set(`userDetails_${req.session.sessionId}_${username}`, userDetails);
             userCache.set(`userPredictions_${req.session.sessionId}_${username}`, userPredictions);
 
@@ -48,7 +48,7 @@ module.exports.getMainPage = async (req, res) => {
         }
 
         // Getting raw HTML from the public folder
-        const rawHtml = await fs.promises.readFile(`${__dirname}/../../public/main-page.html`, 'utf-8');
+        const rawHtml = await fs.promises.readFile(`${__dirname}/../../public/user-page.html`, 'utf-8');
 
         // Amending the HTML
         const completeHtml = rawHtml

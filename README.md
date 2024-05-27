@@ -9,6 +9,7 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 - Setup the main structure of the webserver - done
 - Decide where and how to store access token (server or localStorage) - done (storing it with sessionId on the server)
 - Create and test login and registration functionality as well as page routing once login is successful - done
+- Add data caching for faster page loading - done
 
 # TODOS
 
@@ -19,6 +20,7 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 - FootballDData class has to be initialized every few minutes?
 - Main page should have the content of ('My scores', 'My guesses', 'Leaderboard' and 'My Leagues') all in one
 - research and decide on what needs to be logged to the console in the server
+- improve the top-bar
 
 - Currently the UI for login and registration was copied from another source, will implement at the very end to match the UI of the whole website
 

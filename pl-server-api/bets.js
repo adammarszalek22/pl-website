@@ -95,10 +95,10 @@ module.exports.getAllBets = async (access_token) => {
     }
 }
 
-module.exports.getAllBetsByUserId = async (access_token) => {
+module.exports.getAllBetsByUserId = async (access_token, userId) => {
     try {
 
-        const response = await fetch(url + '/bet_by_user_id', {
+        const response = await fetch(url + '/bet_by_user_id/' + userId, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + access_token
@@ -112,7 +112,7 @@ module.exports.getAllBetsByUserId = async (access_token) => {
 
         } else {
 
-            console.error('Request failed:', response.statusTex);
+            console.error('Request failed:', response.statusText);
             return { "status_code": response.status };
 
         }
