@@ -27,9 +27,9 @@
             <div class="leaderboard-content">
                 %LEADERBOARD_CONTENT%
             </div>
-            <form class="carousel-buttons" action="/leaderboard?page=2" method="get">
+            <form class="carousel-buttons leaderboard-buttons" action="/leaderboard" method="get">
                 <button class="carousel-bar-item left" onclick="prevPage()"><</button>
-                <p class="carousel-bar-item page-id">%PAGE%</p>
+                <p class="carousel-bar-item page-id" id="%PAGE_ID%">%PAGE%</p>
                 <button class="carousel-bar-item right" onclick="nextPage()">></button>
                 <input type="hidden" name="page" id="pageInput">
             </form>
@@ -37,13 +37,13 @@
     </div>
     <script>    
     function prevPage() {
-        var currentPage = parseInt(document.querySelector('.page-id').textContent);
-        document.getElementById('pageInput').value = currentPage - 1;
+        const currentPage = parseInt(document.querySelector('.page-id').id);
+        document.getElementById('pageInput').value = Math.max((currentPage - 1), 1);
         document.getElementById('paginationForm').submit();
     }
 
     function nextPage() {
-        var currentPage = parseInt(document.querySelector('.page-id').textContent);
+        const currentPage = parseInt(document.querySelector('.page-id').id);
         document.getElementById('pageInput').value = currentPage + 1;
         document.getElementById('paginationForm').submit();
     }

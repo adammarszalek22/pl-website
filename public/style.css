@@ -153,6 +153,7 @@ nav {
 .carousel-buttons {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 10%;
 }
 
@@ -165,6 +166,10 @@ nav {
 .carousel-bar-item {
     margin: 1%;
     font-family: PremierSans-Bold, Arial, "Helvetica Neue", Helvetica, sans-seriff;
+}
+
+.carousel-bar-item.page-id {
+    text-align: center;
 }
 
 #submit-scores {
@@ -483,7 +488,7 @@ img.team-image {
 
 
 
-
+/* LEADERBOARD */
 .leaderboard {
     background-color: rgba(225, 232, 230, 0.6);
     width: 50%;
@@ -503,6 +508,8 @@ img.team-image {
     align-items: center;
     height: 100%;
     width: 100%;
+    border-bottom: 1px solid #6f7571;
+    font-weight: bold;
 }
 
 .leaderboard-content {

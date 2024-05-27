@@ -19,8 +19,10 @@ class FootballData {
         try {
 
             // Fetching data
-            const staticDataResponse = await fetch(staticUrl);
-            const fixturesResponse = await fetch(fixturesUrl);
+            const [staticDataResponse, fixturesResponse] = Promise.all(
+                fetch(staticUrl),
+                fetch(fixturesUrl)
+            );
 
             this.staticData = await staticDataResponse.json();
             this.fixturesData = await fixturesResponse.json();
