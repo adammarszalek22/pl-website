@@ -1,14 +1,32 @@
 const fs = require('fs');
 
+const NodeCache = require('node-cache');
+
 const { myLeagues, leagues } = require('../../pl-server-api/leagues');
 
+
+const leaguesCache = new NodeCache({ stdTTL: 120, checkperiod: 300 });
+
+
 module.exports.getMyLeaguesPage = async (req, res) => {
-    
+
     try {
 
-        const myAdminLeagues = await myLeagues(req.session.accessToken);
+        let myAdminLeagues = leaguesCache.get(`myLeagues_${req.session.sessionId}`);
+        let joinedLeagues = leaguesCache.get(`leagues_${req.session.sessionId}`);
 
-        const joinedLeagues = await leagues(req.session.accessToken);
+        if (myAdminLeagues === undefined || joinedLeagues === undefined) {
+
+            [myAdminLeagues, joinedLeagues] = await Promise.all([
+                myLeagues(req.session.accessToken),
+                leagues(req.session.accessToken)
+            ]);
+
+            leaguesCache.set(`myLeagues_${req.session.sessionId}`, myAdminLeagues);
+            leaguesCache.set(`leagues_${req.session.sessionId}`, joinedLeagues);
+
+        }
+
 
         if (myAdminLeagues.statusCode !== 200 || joinedLeagues.statusCode !== 200) {
             // Display error on the webpage
@@ -26,18 +44,19 @@ module.exports.getMyLeaguesPage = async (req, res) => {
 
         // Amending the HTML
         const completeHtml = rawHtml
-        .replace('%MY_LEAGUES%', leagueDivs);
+            .replace('%MY_LEAGUES%', leagueDivs);
 
+        // OR SHOULD I CACHE THIS
         res.send(completeHtml);
-    
-    } catch(error) {
+
+    } catch (error) {
 
         console.log(error)
         res
-        .status(401)
-        .json({
-            message: 'Error sending the html'
-        })
+            .status(401)
+            .json({
+                message: 'Error sending the html'
+            })
 
     }
 

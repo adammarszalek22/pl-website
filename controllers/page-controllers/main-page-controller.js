@@ -1,21 +1,37 @@
 const fs = require('fs');
 
+const NodeCache = require('node-cache');
+
 const { footballData } = require('../../fantasy-api.js');
 const { myUserInfo } = require('../../pl-server-api/user');
 const { getAllBetsByUserId } = require('../../pl-server-api/bets');
+
+
+const userCache = new NodeCache({ stdTTL: 120, checkperiod: 300 });
+
 
 module.exports.getMainPage = async (req, res) => {
 
     try {
 
+        let userDetails = userCache.get(`userDetails_${req.session.userId}`);
+        let userPredictions = userCache.get(`userPredictions_${req.session.sessionId}`);
+
+        if (userDetails === undefined || userPredictions === undefined) {
+                
+            // Getting user's main details and getting all of user's predictions
+            [userDetails, userPredictions] = await Promise.all([
+                myUserInfo(req.session.accessToken, req.session.userId),
+                getAllBetsByUserId(req.session.accessToken)
+            ]);
+
+            userCache.set(`userDetails_${req.session.userId}`, userDetails);
+            userCache.set(`userPredictions_${req.session.sessionId}`, userPredictions);
+
+        }
+
         // Getting the current gameweek
         const currentGameweek = footballData.getCurrentGameweek();
-
-        // Getting user's main details
-        const userDetails = await myUserInfo(req.session.accessToken, req.session.userId)
-
-        // Getting all of user's predictions
-        const userPredictions = await getAllBetsByUserId(req.session.accessToken);
 
         let predictionsCard = '';
 

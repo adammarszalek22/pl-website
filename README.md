@@ -16,7 +16,9 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 
 - Leaderboards,
 - Mini-leagues,
-- 
+- FootballDData class has to be initialized every few minutes?
+- Main page should have the content of ('My scores', 'My guesses', 'Leaderboard' and 'My Leagues') all in one
+- research and decide on what needs to be logged to the console in the server
 
 - Currently the UI for login and registration was copied from another source, will implement at the very end to match the UI of the whole website
 

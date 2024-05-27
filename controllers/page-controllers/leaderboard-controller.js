@@ -18,7 +18,7 @@ module.exports.getLeaderboardPage = async (req, res) => {
 
         let users = usersCache.get(`users_${req.session.sessionId}_${page}`);
 
-        if (!users) {
+        if (users === undefined) {
 
             users = await getUsers(req.session.accessToken, page, limit, 'position');
 

@@ -19,23 +19,23 @@ class FootballData {
         try {
 
             // Fetching data
-            const [staticDataResponse, fixturesResponse] = Promise.all(
+            const [staticDataResponse, fixturesResponse] = await Promise.all([
                 fetch(staticUrl),
                 fetch(fixturesUrl)
-            );
+            ]);
 
             this.staticData = await staticDataResponse.json();
             this.fixturesData = await fixturesResponse.json();
     
             this.teams = {};
             
-            // Storing teams information (name, code, etc.)
+            // Storing teams information (name, code, etc.) with team id as key
             for (const team of this.staticData.teams) {
                 this.teams[team.id] = team;
             }
-    
+
             for (const match of this.fixturesData) {
-                
+
                 // Adding team names to the match object
                 match.team_a_name = this.teams[match.team_a].name;
                 match.team_h_name = this.teams[match.team_h].name;
@@ -88,6 +88,9 @@ class FootballData {
             }
         }
 
+        // If the season has finished show last gameweek
+        this.currentGameweek = 38;
+
     }
 
     getCurrentGameweek() {
@@ -125,6 +128,7 @@ const footballData = new FootballData();
 const staticUrl = process.env.FPL_STATIC_URL;
 const fixturesUrl = process.env.FPL_FIXTURES_URL;
 
+// THIS WILL HAVE TO BE FIXED (cannot have this without awaiting somewhere)
 footballData.initializeData(staticUrl, fixturesUrl);
 
 module.exports.footballData = footballData;
