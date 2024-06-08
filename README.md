@@ -1,3 +1,5 @@
+# PROJECT PAUSED due to other commitments (08/06/2024)
+
 # In development
 
 This project was started on 23/03/2024 and is currently being worked on. It will be similar to the mobile app at https://github.com/adammarszalek22/pl but I'm hoping to improve the UI and add more features in the server as I go along (https://github.com/adammarszalek22/pl-server).
@@ -18,7 +20,7 @@ For now the HTML and CSS files are a simple design as I'm focusing on functional
 - Leaderboards,
 - Mini-leagues,
 - FootballDData class has to be initialized every few minutes?
-- Main page should have the content of ('My scores', 'My guesses', 'Leaderboard' and 'My Leagues') all in one
+- Main page should have the content of ('My scores', 'My guesses', 'Leaderboard' and 'My Leagues') all in one ???
 - research and decide on what needs to be logged to the console in the server
 - improve the top-bar
 

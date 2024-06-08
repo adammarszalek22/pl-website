@@ -19,7 +19,7 @@ router
 
 router
 .route('/main')
-.get(mainPageController.getMainPage);
+.get(userPageController.getUser);
 
 router
 .route('/my-leagues')
@@ -31,6 +31,6 @@ router
 
 router
 .route('/user')
-.get(userPageController.getMainPage);
+.get(userPageController.getUser);
 
 module.exports = router;

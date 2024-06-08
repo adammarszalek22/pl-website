@@ -9,8 +9,8 @@ const { getAllBetsByUserId } = require('../../pl-server-api/bets');
 
 const userCache = new NodeCache({ stdTTL: 120, checkperiod: 300 });
 
-
-module.exports.getMainPage = async (req, res) => {
+// NOT IN USE ANYMORE
+module.exports.getUser = async (req, res) => {
 
     try {
 
