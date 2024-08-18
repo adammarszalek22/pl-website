@@ -1,6 +1,8 @@
+const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const morgan = require('morgan');
+const rfs = require('rotating-file-stream');
 
 const bodyParser = require('body-parser');
 
@@ -10,12 +12,10 @@ const scoresRouter = require('./routes/scores-router');
 
 const app = express();
 
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
-
+// SOME USEFUL STUFF
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static(`${__dirname}/public`));
 app.use(session({
     secret: "guihstirv87ntmwert7wmve09tyq9w8ytweoytw09erce9srthgsoe",
@@ -28,7 +28,32 @@ app.use(session({
 app.use((req, _, next) => {
     req.requestTime = new Date().toISOString();
     next()
-})
+});
+
+// LOGGING
+const accessLogStream = rfs.createStream('access.log', { 
+    size: "10M",
+    path: path.join(__dirname, 'log')
+});
+
+morgan.token('sessionId', (req) => {
+    return req.session?.sessionId;
+});
+
+morgan.token('userId', (req) => {
+    return req.session?.userId;
+});
+
+morgan.token('username', (req) => {
+    return req.session?.username;
+});
+
+morgan.token('requestTime', (req) => {
+    return req.requestTime;
+});
+
+app.use(morgan(':requestTime :remote-addr :username :userId :sessionId :method :url :response-time', { stream: accessLogStream }));
+
 
 // For development (so i dont have to login every time)
 const onStartUp = async (req, res) => {
@@ -43,8 +68,18 @@ const onStartUp = async (req, res) => {
     req.session.accessToken = response.access_token;
     req.session.refreshToken = response.refresh_token;
     req.session.userId = response.user_id;
+    req.session.username = 'adam';
+    
+    req.session.save((err) => {
 
-    res.redirect('/main');
+        if (err) {
+            console.error('Session save error:', err);
+            return res.status(500).send('Failed to save session.');
+        }
+
+        res.redirect('/main');
+
+    });
 
     // res.redirect('/login');
 }
@@ -53,6 +88,6 @@ app.use('/', pageRouter);
 app.use('/api/user', userRouter);
 app.use('/api/pl', scoresRouter);
 
-app.get('/', onStartUp);
+app.get('/dev', onStartUp);
 
 module.exports = app;

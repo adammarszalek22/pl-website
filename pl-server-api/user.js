@@ -1,5 +1,8 @@
 // const url = "http://127.0.0.1:5000"
-const url = "https://pl-server.onrender.com"
+const url = "https://pl-server.onrender.com";
+
+// ALL OF THESE HAVE BEEN TRANSALTED BY CHATGPT
+// TODO - LOOK THROUGH AND DOUBLE CHECK/TIDY UP
 
 /**
  * Creates a new user and returns authentication tokens.
@@ -22,7 +25,7 @@ module.exports.createUser = async (userData) => {
         })
 
         if (response.ok) {
-            return await response.json();
+            return { ...await response.json(), username: userData.username };
         }
 
     } catch(err) {

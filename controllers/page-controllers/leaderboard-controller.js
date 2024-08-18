@@ -60,6 +60,17 @@ module.exports.getLeaderboardPage = async (req, res) => {
 
 const getLeaderboardDiv = (tenUsers) => {
 
+    return tenUsers
+    .reduce((htmlDiv, user) => htmlDiv + `
+        <div class="user-row">
+            <p>${user.position}</p>
+            <p>${user.username}</p>
+            <p>${user.points}</p>
+            <p>${user.one_pointers}</p>
+            <p>${user.three_pointers}</p>
+        </div>
+    `, ``);
+
     let htmlDiv = ``;
 
     for (const user of tenUsers) {

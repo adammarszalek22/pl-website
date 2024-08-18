@@ -19,12 +19,26 @@
 
     <div class="main-leagues-container">
         <div class="league-buttons">
-            <button class="create-league">Create a League</button>
-            <button class="join-league">Join a League</button>
+            <button id="create-league">Create a League</button>
+            <button id="join-league">Join a League</button>
         </div>
         <div class="my-leagues">
             %MY_LEAGUES%
         </div>
     </div>
+
+    <div id="popup" %HIDE%>
+        <form id="league-form">
+            <p id="popup-message">%ERROR_MESSAGE_OR_NOTHING%</p>
+            <input id="popup-input" name="" class="hide"/>
+            <div>
+                <button id="okay-button">OK</button>
+                <button id="cancel-button">CANCEL</button>
+            </div>
+        </form>
+    </div>
+    
+    <script type="module" src="leagues.js"></script>
+
 </body>
 </html>

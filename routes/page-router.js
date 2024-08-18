@@ -23,7 +23,8 @@ router
 
 router
 .route('/my-leagues')
-.get(leaguesPageController.getMyLeaguesPage);
+.get(leaguesPageController.getMyLeaguesPage)
+.post(leaguesPageController.getMyLeaguesPage)
 
 router
 .route('/leaderboard')

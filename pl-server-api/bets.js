@@ -1,7 +1,10 @@
 const { footballData } = require('../fantasy-api.js');
 
 // url = "http://127.0.0.1:5000"
-const url = "https://pl-server.onrender.com"
+const url = "https://pl-server.onrender.com";
+
+// ALL OF THESE HAVE BEEN TRANSALTED BY CHATGPT
+// TODO - LOOK THROUGH AND DOUBLE CHECK/TIDY UP
 
 module.exports.getBet = async (access_token, id) => {
     try {
@@ -97,7 +100,7 @@ module.exports.getAllBets = async (access_token) => {
 
 module.exports.getAllBetsByUserId = async (access_token, userId) => {
     try {
-
+        
         const response = await fetch(url + '/bet_by_user_id/' + userId, {
             method: "GET",
             headers: {
@@ -233,6 +236,7 @@ module.exports.updateMultipleBetsNew = async (access_token, bets) => {
         });
 
         if (response.ok) {
+            console.log('Successfully updated bets');
             return await response.json();
         } else {
             console.error('Request failed:', response.statusText);

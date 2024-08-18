@@ -1,5 +1,8 @@
 // url = "http://127.0.0.1:5000"
-const url = "https://pl-server.onrender.com"
+const url = "https://pl-server.onrender.com";
+
+// ALL OF THESE HAVE BEEN TRANSALTED BY CHATGPT
+// TODO - LOOK THROUGH AND DOUBLE CHECK/TIDY UP
 
 module.exports.getAllGroups = async (access_token) => {
     try {
@@ -16,7 +19,7 @@ module.exports.getAllGroups = async (access_token) => {
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { "statusCode": response.status };
         }
     } catch(err) {
         console.error('An error occurred:', err);
@@ -44,7 +47,7 @@ module.exports.deleteAllGroups = async (access_token, username, password) => {
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { "statusCode": response.status };
         }
     } catch(err) {
         console.error('An error occurred:', err);
@@ -71,7 +74,7 @@ module.exports.getGroupById = async (access_token, id) => {
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { "statusCode": response.status };
         }
     } catch(err) {
         console.error('An error occurred:', err);
@@ -79,8 +82,10 @@ module.exports.getGroupById = async (access_token, id) => {
     }
 }
 
-module.exports.createGroup = async (access_token, name) => {
+module.exports.createLeague = async (access_token, name) => {
+
     try {
+
         const response = await fetch(url + '/groups', {
             method: "POST",
             headers: {
@@ -93,21 +98,25 @@ module.exports.createGroup = async (access_token, name) => {
         });
 
         if (response.ok) {
-            const responseBody = await response.json();
-            console.log(responseBody);
-            return responseBody;
+            return { statusCode: response.status, ...await response.json()};
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { "statusCode": response.status };
         }
+
     } catch(err) {
+
         console.error('An error occurred:', err);
         return null;
+
     }
+    
 }
 
-module.exports.joinGroup = async (access_token, id) => {
+module.exports.joinLeague = async (access_token, id) => {
+
     try {
+
         const response = await fetch(url + '/groups', {
             method: "PUT",
             headers: {
@@ -120,20 +129,19 @@ module.exports.joinGroup = async (access_token, id) => {
         });
 
         if (response.ok) {
-            const responseBody = await response.json();
-            console.log(responseBody);
-            return responseBody;
-        } else if (response.status === 409) {
-            console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { statusCode: response.status, ...await response.json()};
         } else {
             console.error('Request failed:', response.statusText);
-            return null;
+            return { "statusCode": response.status };
         }
+
     } catch(err) {
+
         console.error('An error occurred:', err);
         return null;
+        
     }
+
 }
 
 module.exports.deleteGroup = async (access_token, id) => {
@@ -155,7 +163,7 @@ module.exports.deleteGroup = async (access_token, id) => {
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { "statusCode": response.status };
         }
     } catch(err) {
         console.error('An error occurred:', err);
@@ -183,7 +191,7 @@ module.exports.deleteUserFromGroup = async (access_token, id, user_id) => {
             return responseBody;
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status };
+            return { "statusCode": response.status };
         }
     } catch(err) {
         console.error('An error occurred:', err);
@@ -209,10 +217,10 @@ module.exports.myLeagues = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            return { "status_code": response.status, "leagues": responseBody };
+            return { "statusCode": response.status, "leagues": responseBody };
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status, "leagues": [] };
+            return { "statusCode": response.status, "leagues": [] };
         }
 
     } catch(err) {
@@ -241,10 +249,10 @@ module.exports.leagues = async (access_token) => {
 
         if (response.ok) {
             const responseBody = await response.json();
-            return { "status_code": response.status, "leagues": responseBody };
+            return { "statusCode": response.status, "leagues": responseBody };
         } else {
             console.error('Request failed:', response.statusText);
-            return { "status_code": response.status, "leagues": [] };
+            return { "statusCode": response.status, "leagues": [] };
         }
 
     } catch(err) {

@@ -14,29 +14,30 @@ module.exports.getUser = async (req, res) => {
 
     try {
 
+        // If a user was specified in the input then show their details, otherwise show details of current user
         let username = req.query.username || req.session.username;
 
         let userDetails = userCache.get(`userDetails_${req.session.sessionId}_${username}`);
         let userPredictions = userCache.get(`userPredictions_${req.session.sessionId}_${username}`);
-
+        
         if (userDetails === undefined || userPredictions === undefined) {
                 
             // Getting user's main details and getting all of user's predictions
             userDetails = await getByUsername(req.session.accessToken, username);
-
-            // If user not found then we display current user info
+            
+            // If user not found then we display current user info (TODO SHOW ERROR TOO)
             if (!userDetails.id) {
                 username = req.session.username;
-                userDetails = await getByUsername(req.session.accessToken, username)
+                userDetails = await getByUsername(req.session.accessToken, username);
             }
-
+            
             userPredictions = await getAllBetsByUserId(req.session.accessToken, userDetails.id);
             
             userCache.set(`userDetails_${req.session.sessionId}_${username}`, userDetails);
             userCache.set(`userPredictions_${req.session.sessionId}_${username}`, userPredictions);
 
         }
-
+        
         // Getting the current gameweek
         const currentGameweek = footballData.getCurrentGameweek();
 
